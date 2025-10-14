@@ -4,13 +4,51 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#0f4a78" />
+    <meta name="description" content="Calculadora de precios Omnilife — calcula tu costo con 35% de descuento y muestra precio sugerido y margen. Optimizada para móviles (ej. Motorola G56-5G)." />
     <title>Calculadora de Precios Omnilife 📊</title>
 
-    <!-- Estilos y iconos (mantén tu css/styles.css) -->
+    <!-- Estilos y iconos -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="" crossorigin="anonymous" />
+
+    <!-- Pequeñas utilidades críticas (visually-hidden y skip-link) para mejora de accesibilidad
+         * Se mantiene el CSS principal en css/styles.css y lo mejoraremos después si confirmas. -->
+    <style>
+    .visually-hidden {
+        position: absolute !important;
+        height: 1px; width: 1px;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+        white-space: nowrap; /* evitar salto de línea */
+        border: 0; padding: 0; margin: -1px;
+    }
+    .skip-link {
+        position: absolute;
+        left: -999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+    .skip-link:focus,
+    .visually-hidden-focusable:focus {
+        position: static;
+        left: 0;
+        width: auto;
+        height: auto;
+        padding: .5rem 1rem;
+        background: #fff;
+        z-index: 9999;
+        border-radius: .25rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    }
+    </style>
 </head>
 <body>
+    <!-- Skip link para usuarios con teclado/lectores de pantalla -->
+    <a href="#main-content" class="skip-link visually-hidden-focusable">Saltar al contenido</a>
+
     <header class="header" role="banner" aria-label="Encabezado principal">
         <div class="container header-inner">
             <div class="brand" aria-hidden="false">
@@ -21,23 +59,26 @@
                 <p class="app-subtitle">Consulta precios con descuento del <strong>35%</strong> y precios públicos sugeridos</p>
             </div>
 
-            <div class="header-meta" aria-hidden="false" aria-live="polite">
-                <div class="meta-item"><i class="fas fa-clock" aria-hidden="true"></i> <span id="headerTime">--:--</span></div>
+            <div class="header-meta" aria-live="polite">
+                <div class="meta-item" aria-hidden="false">
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span id="headerTime">--:--</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <main class="main-content" role="main">
+    <main id="main-content" class="main-content" role="main">
         <div class="container">
 
-            <!-- Barra con resumen (dinámico desde JS si quieres) -->
+            <!-- Barra con resumen -->
             <section class="summary" aria-label="Resumen rápido" role="region">
-                <div class="summary-inner">
-                    <div class="summary-item">
+                <div class="summary-inner" role="group" aria-label="Resumen de métricas">
+                    <div class="summary-item" role="status" aria-live="polite">
                         <div class="summary-label">Productos</div>
                         <div id="summaryCount" class="summary-value">—</div>
                     </div>
-                    <div class="summary-item">
+                    <div class="summary-item" role="status" aria-live="polite">
                         <div class="summary-label">Resultados</div>
                         <div id="summaryResults" class="summary-value">—</div>
                     </div>
@@ -76,7 +117,7 @@
                         </button>
                     </div>
 
-                    <div id="searchResults" class="search-results" role="listbox" aria-live="polite" aria-label="Resultados de búsqueda">
+                    <div id="searchResults" class="search-results" role="listbox" aria-live="polite" aria-label="Resultados de búsqueda" aria-expanded="false">
                         <!-- Resultados dinámicos (inserta elementos con role="option") -->
                     </div>
                 </div>
@@ -110,7 +151,7 @@
                             />
                         </div>
 
-                        <div class="calc-actions">
+                        <div class="calc-actions" style="display:flex;gap:.5rem;align-items:center;">
                             <button id="calculateBtn" class="btn primary calculate-btn" type="button" aria-label="Calcular precios">
                                 <i class="fas fa-calculator" aria-hidden="true"></i> Calcular
                             </button>
@@ -225,6 +266,12 @@
             <small class="attribution">Diseñado para móvil — accesible y rápido</small>
         </div>
     </footer>
+
+    <noscript>
+        <div style="padding:1rem;background:#fff3cd;border:1px solid #ffeeba;color:#856404;margin:1rem;border-radius:.5rem;">
+            ⚠️ Esta aplicación requiere JavaScript para funcionar correctamente. Por favor habilita JavaScript.
+        </div>
+    </noscript>
 
     <!-- Script (deferred para mejor performance) -->
     <script src="js/script.js" defer></script>
