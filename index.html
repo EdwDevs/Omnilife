@@ -4,80 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1e40af">
-    <meta name="description" content="Calculadora de precios Omnilife con descuento del 35%. Consulta productos y calcula ganancias.">
-    <title>💰 Calculadora Omnilife - Precios con 35% de Descuento</title>
+    <title>🛒 Calculadora Omnilife - Nutrición & Seytu</title>
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ========================================
-           🎨 VARIABLES DE DISEÑO MEJORADAS
-           ======================================== */
         :root {
-            /* Colores principales */
             --primary: #1e40af;
             --primary-light: #3b82f6;
-            --primary-dark: #1e3a8a;
             --accent: #10b981;
             --accent-light: #34d399;
             --success: #059669;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --info: #06b6d4;
+            --purple: #8b5cf6;
             
-            /* Tonos de gris */
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
-            --gray-300: #d1d5db;
-            --gray-400: #9ca3af;
             --gray-500: #6b7280;
-            --gray-600: #4b5563;
             --gray-700: #374151;
             --gray-800: #1f2937;
-            --gray-900: #111827;
             
-            /* Sombras mejoradas */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             
-            /* Radiuses */
-            --radius-sm: 0.375rem;
-            --radius: 0.5rem;
-            --radius-md: 0.75rem;
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
-            --radius-full: 9999px;
-            
-            /* Transiciones */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-fast: all 0.15s ease;
         }
 
-        /* ========================================
-           🔧 RESETEO Y BASE
-           ======================================== */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--gray-800);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -86,19 +48,12 @@
             padding: 1rem;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1400px; margin: 0 auto; }
 
-        /* ========================================
-           🎯 HEADER MODERNO
-           ======================================== */
+        /* ===== HEADER ===== */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: var(--radius-xl);
             padding: 2rem;
             margin-bottom: 2rem;
@@ -120,94 +75,305 @@
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             display: flex;
             align-items: center;
             gap: 0.75rem;
+        }
+
+        /* ===== TABS DE PORTAFOLIO ===== */
+        .portfolio-tabs {
+            display: flex;
+            gap: 1rem;
             justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
-        .app-title i {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 1.75rem;
-        }
-
-        .app-subtitle {
-            color: var(--gray-600);
+        .tab-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
             font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .app-subtitle strong {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        .header-meta {
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--gray-700);
+            box-shadow: var(--shadow-md);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: var(--gray-100);
+            transform: translateY(-2px);
+        }
+
+        /* ===== CART FLOATING BUTTON ===== */
+        .cart-float-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* ===== MODAL CARRITO ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
             color: var(--gray-500);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background: var(--gray-100);
+            color: var(--gray-800);
+        }
+
+        /* ===== ITEMS DEL CARRITO ===== */
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .cart-item:hover {
+            background: var(--gray-100);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-code {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cart-item-price {
+            color: var(--gray-600);
             font-size: 0.875rem;
         }
 
-        /* ========================================
-           📊 RESUMEN ESTADÍSTICAS
-           ======================================== */
-        .summary {
-            margin-bottom: 2rem;
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
-        .summary-inner {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            padding: 0.25rem;
         }
 
-        .summary-item {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .qty-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            background: #dc2626;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray-500);
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* ===== RESUMEN DEL CARRITO ===== */
+        .cart-summary {
+            background: linear-gradient(135deg, var(--gray-50), white);
             border-radius: var(--radius-lg);
             padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            animation: fadeInUp 0.5s ease-out;
+            border: 2px solid var(--gray-200);
         }
 
-        .summary-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            border-top: 2px solid var(--gray-300);
         }
 
         .summary-label {
-            font-size: 0.75rem;
             font-weight: 600;
-            text-transform: uppercase;
-            color: var(--gray-500);
-            letter-spacing: 0.05em;
+            color: var(--gray-700);
         }
 
         .summary-value {
-            font-size: 2rem;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--primary);
-            margin-top: 0.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        /* ========================================
-           🔍 BUSCADOR MEJORADO
-           ======================================== */
+        .summary-row:last-child .summary-value {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ===== BÚSQUEDA ===== */
         .search-container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: var(--radius-xl);
             padding: 2rem;
             margin-bottom: 2rem;
@@ -223,10 +389,6 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-        }
-
-        .section-title i {
-            color: var(--primary);
         }
 
         .search-input-group {
@@ -256,11 +418,11 @@
             transform: translateY(-50%);
             background: transparent;
             border: none;
-            color: var(--gray-400);
+            color: var(--gray-500);
             cursor: pointer;
             padding: 0.5rem;
-            border-radius: var(--radius);
-            transition: var(--transition-fast);
+            border-radius: 0.5rem;
+            transition: var(--transition);
             font-size: 1.125rem;
         }
 
@@ -269,13 +431,8 @@
             background: var(--gray-100);
         }
 
-        .clear-btn {
-            right: 3rem;
-        }
-
-        .search-btn {
-            right: 0.5rem;
-        }
+        .clear-btn { right: 3rem; }
+        .search-btn { right: 0.5rem; }
 
         .search-results {
             max-height: 300px;
@@ -292,16 +449,18 @@
             padding: 1rem;
             border-bottom: 1px solid var(--gray-100);
             cursor: pointer;
-            transition: var(--transition-fast);
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-
-        .search-result-item:hover,
-        .search-result-item.focus {
+        .search-result-item:hover {
             background: var(--gray-50);
+        }
+
+        .result-info {
+            flex: 1;
         }
 
         .result-code {
@@ -322,217 +481,29 @@
             font-weight: 600;
         }
 
-        /* ========================================
-           🧮 CALCULADORA
-           ======================================== */
-        .calculator-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-lg);
-            animation: fadeInUp 0.7s ease-out;
-        }
-
-        .calculator-grid {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: 1fr;
-        }
-
-        .calc-input label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--gray-700);
-            font-size: 0.875rem;
-        }
-
-        .calc-input select,
-        .calc-input input {
-            width: 100%;
-            padding: 0.875rem;
-            border: 2px solid var(--gray-200);
-            border-radius: var(--radius-lg);
-            font-size: 1rem;
-            font-weight: 500;
-            transition: var(--transition);
-            background: white;
-        }
-
-        .calc-input select:focus,
-        .calc-input input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        .calc-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.875rem 1.5rem;
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            color: white;
             border: none;
-            border-radius: var(--radius-lg);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
             font-weight: 600;
-            font-size: 1rem;
             cursor: pointer;
             transition: var(--transition);
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 0.5rem;
-            justify-content: center;
-            flex: 1;
-            min-width: 140px;
         }
 
-        .btn.primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn.primary:hover {
+        .add-to-cart-btn:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn.primary:active {
-            transform: translateY(0);
-        }
-
-        .btn.secondary {
-            background: white;
-            color: var(--gray-700);
-            border: 2px solid var(--gray-300);
-        }
-
-        .btn.secondary:hover {
-            background: var(--gray-50);
-            border-color: var(--gray-400);
-        }
-
-        /* ========================================
-           📈 RESULTADOS
-           ======================================== */
-        .results-container {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(249, 250, 251, 0.95));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            margin-top: 2rem;
-            box-shadow: var(--shadow-xl);
-            animation: fadeInScale 0.4s ease-out;
-        }
-
-        .results-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--gray-800);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .results-grid {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        }
-
-        .result-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
             box-shadow: var(--shadow-md);
-            text-align: center;
-            transition: var(--transition);
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
         }
 
-        .result-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-        }
-
-        .result-card.cost-card::before {
-            background: linear-gradient(90deg, #3b82f6, #06b6d4);
-        }
-
-        .result-card.price-card::before {
-            background: linear-gradient(90deg, #10b981, #34d399);
-        }
-
-        .result-card.profit-card::before {
-            background: linear-gradient(90deg, #f59e0b, #fbbf24);
-        }
-
-        .result-card.margin-card::before {
-            background: linear-gradient(90deg, #8b5cf6, #a78bfa);
-        }
-
-        .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--gray-200);
-        }
-
-        .result-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .result-header i {
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .result-header h4 {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--gray-600);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .result-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--gray-900);
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
-        }
-
-        .result-subtitle {
-            font-size: 0.75rem;
-            color: var(--gray-500);
-            font-weight: 500;
-        }
-
-        /* ========================================
-           📋 TABLA DE PRODUCTOS
-           ======================================== */
+        /* ===== TABLA DE PRODUCTOS ===== */
         .products-container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: var(--radius-xl);
             padding: 2rem;
             margin-bottom: 2rem;
@@ -573,18 +544,18 @@
 
         .products-table tbody tr {
             border-bottom: 1px solid var(--gray-100);
-            transition: var(--transition-fast);
+            transition: var(--transition);
         }
 
         .products-table tbody tr:hover {
             background: var(--gray-50);
         }
 
-        .select-btn {
+        .action-btn {
             background: linear-gradient(135deg, var(--primary-light), var(--primary));
             color: white;
             border: none;
-            border-radius: var(--radius);
+            border-radius: 0.5rem;
             padding: 0.5rem 1rem;
             font-size: 0.875rem;
             font-weight: 600;
@@ -595,361 +566,243 @@
             gap: 0.375rem;
         }
 
-        .select-btn:hover {
+        .action-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
 
-        /* ========================================
-           🎯 UTILIDADES
-           ======================================== */
-        .hidden {
-            display: none !important;
+        .btn {
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            flex: 1;
         }
 
-        .text-success {
-            color: var(--success) !important;
+        .btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: var(--shadow-md);
         }
 
-        .text-warning {
-            color: var(--warning) !important;
+        .btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .text-danger {
-            color: var(--danger) !important;
+        .btn.secondary {
+            background: white;
+            color: var(--gray-700);
+            border: 2px solid var(--gray-300);
         }
 
-        .text-muted {
-            color: var(--gray-500) !important;
+        .btn.secondary:hover {
+            background: var(--gray-50);
         }
 
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
+        .btn.success {
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            color: white;
+            box-shadow: var(--shadow-md);
         }
 
-        /* ========================================
-           🎬 ANIMACIONES
-           ======================================== */
+        .btn.danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* ===== UTILIDADES ===== */
+        .hidden { display: none !important; }
+        .text-success { color: var(--success) !important; }
+        .text-warning { color: var(--warning) !important; }
+        .text-danger { color: var(--danger) !important; }
+
+        /* ===== ANIMACIONES ===== */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ========================================
-           📱 RESPONSIVE
-           ======================================== */
-        @media (min-width: 640px) {
-            .calculator-grid {
-                grid-template-columns: 2fr 1fr;
-            }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* ===== RESPONSIVE ===== */
         @media (min-width: 768px) {
             .header-inner {
                 flex-direction: row;
                 justify-content: space-between;
                 text-align: left;
-                align-items: center;
-            }
-
-            .app-title {
-                justify-content: flex-start;
-            }
-
-            .calculator-grid {
-                grid-template-columns: 2fr 1fr auto;
             }
         }
 
-        @media (min-width: 1024px) {
-            body {
-                padding: 2rem;
+        @media (max-width: 768px) {
+            .products-table th:nth-child(3),
+            .products-table td:nth-child(3),
+            .products-table th:nth-child(4),
+            .products-table td:nth-child(4) {
+                display: none;
             }
-        }
-
-        /* ========================================
-           🎨 SCROLLBAR PERSONALIZADO
-           ======================================== */
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-            border-radius: var(--radius-full);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gray-400);
-            border-radius: var(--radius-full);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gray-500);
-        }
-
-        /* ========================================
-           🎯 FOOTER
-           ======================================== */
-        .footer {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            text-align: center;
-            color: var(--gray-600);
-            box-shadow: var(--shadow-lg);
-            animation: fadeInUp 0.9s ease-out;
-        }
-
-        .footer-inner p {
-            margin-bottom: 0.5rem;
-        }
-
-        .attribution {
-            font-size: 0.875rem;
-            color: var(--gray-500);
         }
     </style>
 </head>
 <body>
-    <!-- 🎯 HEADER -->
-    <header class="header" role="banner">
+    <!-- HEADER -->
+    <header class="header">
         <div class="container header-inner">
-            <div class="brand">
+            <div>
                 <h1 class="app-title">
                     <i class="fas fa-calculator"></i>
                     <span>Calculadora Omnilife</span>
                 </h1>
-                <p class="app-subtitle">Precios con descuento del <strong>35%</strong> y precios sugeridos</p>
-            </div>
-            <div class="header-meta">
-                <i class="fas fa-clock"></i>
-                <span id="headerTime">--:--</span>
+                <p style="color: var(--gray-700); margin-top: 0.5rem;">
+                    Nutrición & Belleza Seytu - <strong style="color: var(--accent);">35% de descuento</strong>
+                </p>
             </div>
         </div>
     </header>
 
-    <main class="main-content" role="main">
-        <div class="container">
-            <!-- 📊 RESUMEN -->
-            <section class="summary" role="region" aria-label="Resumen rápido">
-                <div class="summary-inner">
-                    <div class="summary-item">
-                        <div class="summary-label">Productos</div>
-                        <div id="summaryCount" class="summary-value">—</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Resultados</div>
-                        <div id="summaryResults" class="summary-value">—</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Tu Descuento</div>
-                        <div class="summary-value">35%</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 🔍 BUSCADOR -->
-            <section class="search-section">
-                <div class="search-container">
-                    <h2 class="section-title">
-                        <i class="fas fa-search"></i>
-                        Buscar Producto
-                    </h2>
-                    <div class="search-input-group" role="search">
-                        <label for="searchInput" class="visually-hidden">Buscar producto</label>
-                        <input
-                            type="search"
-                            id="searchInput"
-                            placeholder="Buscar por código o descripción..."
-                            autocomplete="off"
-                            aria-controls="searchResults"
-                            aria-expanded="false"
-                        />
-                        <button id="clearSearch" class="btn-icon clear-btn" type="button" aria-label="Limpiar búsqueda">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <button id="searchBtn" class="btn-icon search-btn" type="button" aria-label="Buscar">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                    <div id="searchResults" class="search-results" role="listbox" style="display: none;"></div>
-                </div>
-            </section>
-
-            <!-- 🧮 CALCULADORA -->
-            <section class="calculator-section">
-                <div class="calculator-container">
-                    <h2 class="section-title">
-                        <i class="fas fa-chart-line"></i>
-                        Calculadora de Precios
-                    </h2>
-                    <form id="calculatorForm" class="calculator-grid" autocomplete="off">
-                        <div class="calc-input">
-                            <label for="productSelect">Producto Seleccionado</label>
-                            <select id="productSelect" name="productSelect">
-                                <option value="">— Selecciona un producto —</option>
-                            </select>
-                        </div>
-                        <div class="calc-input">
-                            <label for="quantityInput">Cantidad</label>
-                            <input
-                                type="number"
-                                id="quantityInput"
-                                name="quantityInput"
-                                min="1"
-                                value="1"
-                                placeholder="1"
-                            />
-                        </div>
-                        <div class="calc-actions">
-                            <button id="calculateBtn" class="btn primary" type="button">
-                                <i class="fas fa-calculator"></i>
-                                Calcular
-                            </button>
-                            <button id="resetBtn" class="btn secondary" type="button">
-                                <i class="fas fa-undo"></i>
-                                Reiniciar
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- 📈 RESULTADOS -->
-                    <div id="results" class="results-container" style="display: none;">
-                        <h3 class="results-title">
-                            <i class="fas fa-chart-pie"></i>
-                            Resultados del Cálculo
-                        </h3>
-                        <div class="results-grid">
-                            <article class="result-card cost-card">
-                                <div class="result-header">
-                                    <i class="fas fa-tags"></i>
-                                    <h4>Tu Costo</h4>
-                                </div>
-                                <div class="result-value" id="costResult">$0</div>
-                                <div class="result-subtitle">Con 35% de descuento</div>
-                            </article>
-                            <article class="result-card price-card">
-                                <div class="result-header">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    <h4>Precio Sugerido</h4>
-                                </div>
-                                <div class="result-value" id="priceResult">$0</div>
-                                <div class="result-subtitle">Precio al público</div>
-                            </article>
-                            <article class="result-card profit-card">
-                                <div class="result-header">
-                                    <i class="fas fa-arrow-up"></i>
-                                    <h4>Ganancia</h4>
-                                </div>
-                                <div class="result-value" id="profitResult">$0</div>
-                                <div class="result-subtitle">Tu beneficio</div>
-                            </article>
-                            <article class="result-card margin-card">
-                                <div class="result-header">
-                                    <i class="fas fa-percentage"></i>
-                                    <h4>Margen</h4>
-                                </div>
-                                <div class="result-value" id="marginResult">0%</div>
-                                <div class="result-subtitle">Porcentaje de ganancia</div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 📋 TABLA DE PRODUCTOS -->
-            <section class="products-section">
-                <div class="products-container">
-                    <h2 class="section-title">
-                        <i class="fas fa-table"></i>
-                        Catálogo de Productos
-                    </h2>
-                    <div class="table-wrapper">
-                        <table class="products-table">
-                            <thead>
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Descripción</th>
-                                    <th>Puntos</th>
-                                    <th>Precio Lista</th>
-                                    <th>Tu Costo (35%)</th>
-                                    <th>Precio Sugerido</th>
-                                    <th>Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody id="productsTableBody">
-                                <!-- Productos cargados dinámicamente -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+    <main class="container">
+        <!-- TABS DE PORTAFOLIO -->
+        <div class="portfolio-tabs">
+            <button class="tab-btn active" data-portfolio="nutricion">
+                <i class="fas fa-leaf"></i>
+                Nutrición
+            </button>
+            <button class="tab-btn" data-portfolio="seytu">
+                <i class="fas fa-spa"></i>
+                Belleza Seytu
+            </button>
         </div>
+
+        <!-- BÚSQUEDA -->
+        <section class="search-container">
+            <h2 class="section-title">
+                <i class="fas fa-search"></i>
+                Buscar Producto
+            </h2>
+            <div class="search-input-group">
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Buscar por código o descripción..."
+                    autocomplete="off"
+                />
+                <button id="clearSearch" class="btn-icon clear-btn" type="button">
+                    <i class="fas fa-times"></i>
+                </button>
+                <button id="searchBtn" class="btn-icon search-btn" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div id="searchResults" class="search-results" style="display: none;"></div>
+        </section>
+
+        <!-- TABLA DE PRODUCTOS -->
+        <section class="products-container">
+            <h2 class="section-title">
+                <i class="fas fa-table"></i>
+                <span id="catalogTitle">Catálogo de Nutrición</span>
+            </h2>
+            <div class="table-wrapper">
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>Puntos</th>
+                            <th>Precio Lista</th>
+                            <th>Tu Costo (35%)</th>
+                            <th>Precio Sugerido</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
     </main>
 
-    <!-- 🎯 FOOTER -->
-    <footer class="footer" role="contentinfo">
-        <div class="container footer-inner">
-            <p>&copy; 2025 Calculadora de Precios Omnilife</p>
-            <small class="attribution">Diseñado para tu negocio 💼</small>
-        </div>
-    </footer>
+    <!-- BOTÓN FLOTANTE CARRITO -->
+    <button class="cart-float-btn" id="cartFloatBtn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+    </button>
 
-    <!-- 🚀 JAVASCRIPT -->
+    <!-- MODAL CARRITO -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-shopping-cart"></i>
+                    Mi Carrito de Compras
+                </h3>
+                <button class="close-modal" id="closeCartModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div id="cartItemsContainer" class="cart-items"></div>
+
+            <div class="cart-summary" id="cartSummary" style="display: none;">
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal (Tu Costo):</span>
+                    <span class="summary-value" id="subtotalCost">$0</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Total Sugerido:</span>
+                    <span class="summary-value" id="totalSuggested">$0</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Tu Ganancia Potencial:</span>
+                    <span class="summary-value text-success" id="totalProfit">$0</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Margen:</span>
+                    <span class="summary-value" id="profitMargin">0%</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Total a Pagar:</span>
+                    <span class="summary-value" id="totalToPay">$0</span>
+                </div>
+            </div>
+
+            <div class="cart-actions" id="cartActions" style="display: none;">
+                <button class="btn danger" id="clearCartBtn">
+                    <i class="fas fa-trash"></i>
+                    Vaciar Carrito
+                </button>
+                <button class="btn success" id="checkoutBtn">
+                    <i class="fas fa-check"></i>
+                    Finalizar Compra
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // ========================================
-        // 📦 BASE DE DATOS DE PRODUCTOS
-        // ========================================
-        const products = [
+        // ==========================================
+        // DATOS DE PRODUCTOS
+        // ==========================================
+        const productsNutricion = [
             { code: "4250604", description: "ALOE BETA PIÑA, 200 ML E", points: 5, listPrice: 9700, discount35: 8773, suggestedPrice: 12800 },
             { code: "4850500", description: "EGO FRUTAS DEL BOSQUE EVOLUCIÓN LATA 355 ML", points: 26, listPrice: 72200, discount35: 65298, suggestedPrice: 95350 },
             { code: "1260600", description: "EGO PLANT BOTELLA 200 ML E", points: 5, listPrice: 9700, discount35: 8773, suggestedPrice: 12800 },
@@ -991,41 +844,90 @@
             { code: "3304732", description: "TMGN COFFEE EVOLUCION", points: 39, listPrice: 68510, discount35: 61960, suggestedPrice: 90500 }
         ];
 
-        // ========================================
-        // 🎯 VARIABLES GLOBALES
-        // ========================================
-        let selectedProduct = null;
-        let searchFocusIndex = -1;
+        const productsSeytu = [
+            { code: "9501178", description: "CREMA DE DIA FPS30 (SYSTEM) 50ml", points: 67, discount35: 98887, suggestedPrice: 154600 },
+            { code: "9501179", description: "SUERO DE NOCHE (SYSTEM) 30ml", points: 71, discount35: 99014, suggestedPrice: 154800 },
+            { code: "9501174", description: "CREMA PARA CONTORNO DE OJOS (SYSTEM) 15ml", points: 43, discount35: 63579, suggestedPrice: 99400 },
+            { code: "9504024", description: "SHAMPOO FORTIFICANTE", points: 49, discount35: 68699, suggestedPrice: 107400 },
+            { code: "9501181", description: "LOCION CAPILAR FORTIFICANTE", points: 62, discount35: 93708, suggestedPrice: 146500 },
+            { code: "9501197", description: "GEL ANTI-MANCHAS", points: 53, discount35: 86670, suggestedPrice: 135500 },
+            { code: "9501200", description: "CREMA PARA MANOS CUELLO Y ESCOTE", points: 45, discount35: 80401, suggestedPrice: 125700 },
+            { code: "9501187", description: "DERMOLIMPIADOR FACIAL", points: 29, discount35: 53727, suggestedPrice: 84000 },
+            { code: "9501188", description: "GEL LOCALIZADO", points: 23, discount35: 53094, suggestedPrice: 83000 },
+            { code: "9501189", description: "SUERO PERFECCIONADOR", points: 30, discount35: 69721, suggestedPrice: 109000 },
+            { code: "9519036", description: "ESPUMA LIMPIADORA FACIAL", points: 33, discount35: 44771, suggestedPrice: 70000 },
+            { code: "9501203", description: "TÓNICO HIDRATANTE", points: 51, discount35: 78736, suggestedPrice: 123100 },
+            { code: "9501206", description: "CREMA LIMPIADORA FACIAL", points: 33, discount35: 43563, suggestedPrice: 68100 },
+            { code: "9501218", description: "DESMAQUILLANTE PARA OJOS", points: 26, discount35: 36973, suggestedPrice: 57800 },
+            { code: "9501191", description: "MASCARILLA FACIAL", points: 37, discount35: 53541, suggestedPrice: 83700 },
+            { code: "9501212", description: "MICRO-EXFOLIANTE FACIAL", points: 31, discount35: 42220, suggestedPrice: 66000 },
+            { code: "9501171", description: "CREMA HIDRATANTE DE DÍA FPS20", points: 42, discount35: 61982, suggestedPrice: 96900 },
+            { code: "9501170", description: "CREMA HIDRATANTE DE NOCHE", points: 42, discount35: 61982, suggestedPrice: 96900 },
+            { code: "9501145", description: "SUERO FACIAL HIDRATACIÓN PROFUNDA ALOE VERA", points: 39, discount35: 55839, suggestedPrice: 87300 },
+            { code: "9501157", description: "SUERO CONTORNO OJOS HIDRATACIÓN PROFUNDA ALOE", points: 21, discount35: 35756, suggestedPrice: 55900 },
+            { code: "9501186", description: "GEL-CREMA PARA ESTRIAS", points: 46, discount35: 69468, suggestedPrice: 108600 },
+            { code: "9501078", description: "CREMA CORPORAL PIEL DE NARANJA", points: 54, discount35: 71639, suggestedPrice: 112000 },
+            { code: "9501214", description: "PROTECTOR SOLAR FACIAL FPS 50+", points: 34, discount35: 55645, suggestedPrice: 87000 },
+            { code: "9501215", description: "PROTECTOR SOLAR CORPORAL FPS 50+", points: 48, discount35: 75990, suggestedPrice: 118800 },
+            { code: "9501146", description: "OMNIPLUS GEL PREMIUM", points: 28, discount35: 38502, suggestedPrice: 60200 },
+            { code: "9501209", description: "BALSAMO LABIAL OMNIPLUS FPS 15", points: 29, discount35: 41451, suggestedPrice: 64800 },
+            { code: "9510028", description: "FRAGANCIA SUCCESI FOR HIM", points: 73, discount35: 96842, suggestedPrice: 151400 },
+            { code: "9510029", description: "FRAGANCIA SUCCESI FOR HER", points: 73, discount35: 96842, suggestedPrice: 151400 },
+            { code: "9508037", description: "MAQUILLAJE LIQUIDO UP+ FPS15 FAIR", points: 51, discount35: 79632, suggestedPrice: 124500 },
+            { code: "9508038", description: "MAQUILLAJE LIQUIDO UP+ FPS15 LIGHT SAND", points: 51, discount35: 79632, suggestedPrice: 124500 },
+            { code: "9508039", description: "MAQUILLAJE LIQUIDO UP+ FPS15 SUN HONEY", points: 51, discount35: 79632, suggestedPrice: 124500 },
+            { code: "9508040", description: "MAQUILLAJE LIQUIDO UP+ FPS15 NAT BEIGE", points: 51, discount35: 79632, suggestedPrice: 124500 },
+            { code: "9511029", description: "MAQUILLAJE COMPACTO 2 EN1 FAIR", points: 42, discount35: 64153, suggestedPrice: 100300 },
+            { code: "9511030", description: "MAQUILLAJE COMPACTO 2 EN1 LIGHT SAND", points: 42, discount35: 64153, suggestedPrice: 100300 },
+            { code: "8911501", description: "POLVO TRASLUCIDO", points: 35, discount35: 42921, suggestedPrice: 67100 },
+            { code: "9509015", description: "RUBOR COMPACTO APRICOT", points: 25, discount35: 36457, suggestedPrice: 57000 },
+            { code: "9509016", description: "RUBOR COMPACTO PEACH", points: 25, discount35: 36457, suggestedPrice: 57000 },
+            { code: "9506013", description: "DELINEADOR PARA OJOS PENLINER", points: 22, discount35: 30509, suggestedPrice: 47700 },
+            { code: "9512023", description: "MASCARA PARA PESTAÑAS", points: 30, discount35: 40488, suggestedPrice: 63300 },
+            { code: "9506015", description: "SET DELINEADOR COMPACTO DE CEJAS", points: 44, discount35: 69527, suggestedPrice: 108700 },
+            { code: "9517524", description: "LABIAL HIDRATANTE HOT PINK FPS15", points: 23, discount35: 37674, suggestedPrice: 58900 },
+            { code: "9517525", description: "LABIAL HIDRATANTE LIGHT PINK FPS15", points: 23, discount35: 37674, suggestedPrice: 58900 },
+            { code: "9517518", description: "BRILLO LABIAL OPALO", points: 31, discount35: 45219, suggestedPrice: 70700 },
+            { code: "9504033", description: "ACONDICIONADOR CON EXTRACTOS HERBALES", points: 19, discount35: 23919, suggestedPrice: 37400 },
+            { code: "9501158", description: "SHAMPOO CON EXTRACTOS HERBALES 300 ML", points: 21, discount35: 28017, suggestedPrice: 43800 },
+            { code: "9504041", description: "SHAMPOO CUIDADO ESPECIAL CABELLO DÉBIL", points: 28, discount35: 37032, suggestedPrice: 57900 },
+            { code: "9504044", description: "COMPLEJO MULTIVITAMÍNICO CAPILAR", points: 49, discount35: 79826, suggestedPrice: 124800 },
+            { code: "9518039", description: "TINTE PERMANENTE CASTAÑO OSCURO", points: 28, discount35: 43301, suggestedPrice: 67700 },
+            { code: "9518040", description: "TINTE PERMANENTE CASTAÑO CLARO", points: 28, discount35: 43301, suggestedPrice: 67700 }
+        ];
 
-        // Elementos del DOM
+        // ==========================================
+        // ESTADO GLOBAL
+        // ==========================================
+        let currentPortfolio = 'nutricion';
+        let currentProducts = productsNutricion;
+        let cart = [];
+
+        // ==========================================
+        // ELEMENTOS DOM
+        // ==========================================
         const searchInput = document.getElementById('searchInput');
         const clearSearchBtn = document.getElementById('clearSearch');
         const searchResults = document.getElementById('searchResults');
-        const productSelect = document.getElementById('productSelect');
-        const quantityInput = document.getElementById('quantityInput');
-        const calculateBtn = document.getElementById('calculateBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const resultsDiv = document.getElementById('results');
         const productsTableBody = document.getElementById('productsTableBody');
-        const summaryCountEl = document.getElementById('summaryCount');
-        const summaryResultsEl = document.getElementById('summaryResults');
-        const headerTimeEl = document.getElementById('headerTime');
+        const cartFloatBtn = document.getElementById('cartFloatBtn');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartModal = document.getElementById('cartModal');
+        const closeCartModal = document.getElementById('closeCartModal');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartSummary = document.getElementById('cartSummary');
+        const cartActions = document.getElementById('cartActions');
+        const catalogTitle = document.getElementById('catalogTitle');
 
-        // ========================================
-        // 🛠️ UTILIDADES
-        // ========================================
+        // ==========================================
+        // UTILIDADES
+        // ==========================================
         function formatCurrency(amount) {
             return new Intl.NumberFormat('es-CO', {
                 style: 'currency',
                 currency: 'COP',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
+                minimumFractionDigits: 0
             }).format(amount);
-        }
-
-        function formatPercentage(percentage) {
-            if (!isFinite(percentage)) return '—';
-            return `${percentage.toFixed(1)}%`;
         }
 
         function debounce(fn, wait = 300) {
@@ -1036,343 +938,262 @@
             };
         }
 
-        // ========================================
-        // 🚀 INICIALIZACIÓN
-        // ========================================
-        function initApp() {
-            populateProductSelect();
+        // ==========================================
+        // CARRITO DE COMPRAS
+        // ==========================================
+        function addToCart(product, quantity = 1) {
+            const existingItem = cart.find(item => item.code === product.code);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ ...product, quantity });
+            }
+            
+            updateCartUI();
+            showNotification(`✅ ${product.description.slice(0, 40)}... agregado al carrito`);
+        }
+
+        function removeFromCart(code) {
+            cart = cart.filter(item => item.code !== code);
+            updateCartUI();
+        }
+
+        function updateCartQuantity(code, newQuantity) {
+            const item = cart.find(item => item.code === code);
+            if (item) {
+                item.quantity = Math.max(1, newQuantity);
+                updateCartUI();
+            }
+        }
+
+        function clearCart() {
+            if (confirm('¿Estás seguro de vaciar el carrito?')) {
+                cart = [];
+                updateCartUI();
+                showNotification('🗑️ Carrito vaciado');
+            }
+        }
+
+        function updateCartUI() {
+            // Actualizar badge
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartBadge.textContent = totalItems;
+            cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+
+            // Actualizar contenido del modal
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Tu carrito está vacío</p>
+                    </div>
+                `;
+                cartSummary.style.display = 'none';
+                cartActions.style.display = 'none';
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.description}</div>
+                            <div class="cart-item-code">${item.code}</div>
+                            <div class="cart-item-price">
+                                ${formatCurrency(item.discount35)} × ${item.quantity} = 
+                                <strong>${formatCurrency(item.discount35 * item.quantity)}</strong>
+                            </div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <div class="qty-control">
+                                <button class="qty-btn" onclick="updateCartQuantity('${item.code}', ${item.quantity - 1})">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span class="qty-display">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateCartQuantity('${item.code}', ${item.quantity + 1})">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <button class="remove-item" onclick="removeFromCart('${item.code}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Calcular totales
+                const subtotalCost = cart.reduce((sum, item) => sum + (item.discount35 * item.quantity), 0);
+                const totalSuggested = cart.reduce((sum, item) => sum + (item.suggestedPrice * item.quantity), 0);
+                const totalProfit = totalSuggested - subtotalCost;
+                const profitMargin = subtotalCost > 0 ? (totalProfit / subtotalCost) * 100 : 0;
+
+                document.getElementById('subtotalCost').textContent = formatCurrency(subtotalCost);
+                document.getElementById('totalSuggested').textContent = formatCurrency(totalSuggested);
+                document.getElementById('totalProfit').textContent = formatCurrency(totalProfit);
+                document.getElementById('profitMargin').textContent = `${profitMargin.toFixed(1)}%`;
+                document.getElementById('totalToPay').textContent = formatCurrency(subtotalCost);
+
+                cartSummary.style.display = 'block';
+                cartActions.style.display = 'flex';
+            }
+        }
+
+        function showNotification(message) {
+            // Puedes implementar un toast notification aquí
+            console.log(message);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+
+            const summary = cart.map(item => 
+                `${item.quantity}x ${item.description} - ${formatCurrency(item.discount35 * item.quantity)}`
+            ).join('\n');
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.discount35 * item.quantity), 0);
+            
+            alert(`
+🛒 RESUMEN DE TU PEDIDO
+
+${summary}
+
+💰 TOTAL A PAGAR: ${formatCurrency(subtotal)}
+
+✅ ¡Pedido listo! Contacta a tu distribuidor para completar la compra.
+            `);
+        }
+
+        // ==========================================
+        // PORTAFOLIOS
+        // ==========================================
+        function switchPortfolio(portfolio) {
+            currentPortfolio = portfolio;
+            currentProducts = portfolio === 'nutricion' ? productsNutricion : productsSeytu;
+            
+            // Actualizar tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.portfolio === portfolio);
+            });
+
+            // Actualizar título
+            catalogTitle.textContent = portfolio === 'nutricion' ? 
+                'Catálogo de Nutrición' : 'Catálogo de Belleza Seytu';
+
+            // Repoblar tabla
             populateProductsTable();
-            setupEventListeners();
-            updateSummaryCounts();
-            updateHeaderTime();
-            setInterval(updateHeaderTime, 60000);
-            console.log('🚀 Aplicación inicializada correctamente');
-            console.log(`📊 ${products.length} productos cargados`);
+            
+            // Limpiar búsqueda
+            searchInput.value = '';
+            searchResults.style.display = 'none';
         }
 
-        // ========================================
-        // 📊 POBLAR SELECT DE PRODUCTOS
-        // ========================================
-        function populateProductSelect() {
-            productSelect.innerHTML = '<option value="">— Selecciona un producto —</option>';
-            products.forEach((p, i) => {
-                const opt = document.createElement('option');
-                opt.value = i;
-                opt.textContent = `${p.code} - ${p.description}`;
-                productSelect.appendChild(opt);
-            });
-        }
-
-        // ========================================
-        // 📋 POBLAR TABLA DE PRODUCTOS
-        // ========================================
+        // ==========================================
+        // TABLA DE PRODUCTOS
+        // ==========================================
         function populateProductsTable() {
-            productsTableBody.innerHTML = '';
-            products.forEach((product, index) => {
-                const tr = document.createElement('tr');
-
-                // Código
-                const tdCode = document.createElement('td');
-                const strong = document.createElement('strong');
-                strong.textContent = product.code;
-                tdCode.appendChild(strong);
-
-                // Descripción
-                const tdDesc = document.createElement('td');
-                tdDesc.textContent = product.description;
-
-                // Puntos
-                const tdPoints = document.createElement('td');
-                tdPoints.textContent = product.points;
-
-                // Precio Lista
-                const tdList = document.createElement('td');
-                tdList.textContent = formatCurrency(product.listPrice);
-
-                // Tu Costo
-                const tdDiscount = document.createElement('td');
-                tdDiscount.className = 'text-success';
-                const sDiscount = document.createElement('strong');
-                sDiscount.textContent = formatCurrency(product.discount35);
-                tdDiscount.appendChild(sDiscount);
-
-                // Precio Sugerido
-                const tdSuggested = document.createElement('td');
-                tdSuggested.className = 'text-warning';
-                const sSuggested = document.createElement('strong');
-                sSuggested.textContent = formatCurrency(product.suggestedPrice);
-                tdSuggested.appendChild(sSuggested);
-
-                // Botón Seleccionar
-                const tdAction = document.createElement('td');
-                const btn = document.createElement('button');
-                btn.className = 'select-btn';
-                btn.type = 'button';
-                btn.innerHTML = '<i class="fas fa-check"></i> Seleccionar';
-                btn.addEventListener('click', () => selectProduct(index));
-                tdAction.appendChild(btn);
-
-                tr.appendChild(tdCode);
-                tr.appendChild(tdDesc);
-                tr.appendChild(tdPoints);
-                tr.appendChild(tdList);
-                tr.appendChild(tdDiscount);
-                tr.appendChild(tdSuggested);
-                tr.appendChild(tdAction);
-
-                productsTableBody.appendChild(tr);
-            });
+            productsTableBody.innerHTML = currentProducts.map((product, index) => `
+                <tr>
+                    <td><strong>${product.code}</strong></td>
+                    <td>${product.description}</td>
+                    <td>${product.points}</td>
+                    <td>${product.listPrice ? formatCurrency(product.listPrice) : '—'}</td>
+                    <td class="text-success"><strong>${formatCurrency(product.discount35)}</strong></td>
+                    <td class="text-warning"><strong>${formatCurrency(product.suggestedPrice)}</strong></td>
+                    <td>
+                        <button class="action-btn" onclick="addToCart(currentProducts[${index}])">
+                            <i class="fas fa-cart-plus"></i> Agregar
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        // ========================================
-        // 🔢 ACTUALIZAR RESUMEN
-        // ========================================
-        function updateSummaryCounts(filteredCount = null) {
-            if (summaryCountEl) summaryCountEl.textContent = products.length;
-            if (summaryResultsEl) summaryResultsEl.textContent = filteredCount === null ? '—' : filteredCount;
-        }
-
-        // ========================================
-        // ⏰ ACTUALIZAR HORA
-        // ========================================
-        function updateHeaderTime() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
-            if (headerTimeEl) headerTimeEl.textContent = timeStr;
-        }
-
-        // ========================================
-        // 🎧 EVENT LISTENERS
-        // ========================================
-        function setupEventListeners() {
-            // Búsqueda con debounce
-            searchInput.addEventListener('input', debounce(handleSearch, 300));
-            searchInput.addEventListener('keydown', handleSearchKeydown);
-            searchInput.addEventListener('focus', () => {
-                if (searchInput.value.trim()) handleSearch();
-            });
-
-            // Botones de búsqueda
-            clearSearchBtn.addEventListener('click', clearSearch);
-            searchBtn.addEventListener('click', handleSearch);
-
-            // Calculadora
-            productSelect.addEventListener('change', handleProductSelection);
-            quantityInput.addEventListener('input', validateQuantity);
-            calculateBtn.addEventListener('click', calculatePrices);
-            resetBtn.addEventListener('click', resetCalculator);
-
-            // Cerrar resultados al hacer clic fuera
-            document.addEventListener('click', (e) => {
-                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                    hideSearchResults();
-                }
-            });
-        }
-
-        // ========================================
-        // 🔍 BÚSQUEDA DE PRODUCTOS
-        // ========================================
+        // ==========================================
+        // BÚSQUEDA
+        // ==========================================
         function handleSearch() {
             const query = searchInput.value.trim().toLowerCase();
             
             if (!query) {
-                hideSearchResults();
-                updateSummaryCounts(null);
+                searchResults.style.display = 'none';
                 return;
             }
 
-            const filtered = products.filter(p =>
+            const filtered = currentProducts.filter(p =>
                 p.code.toLowerCase().includes(query) ||
                 p.description.toLowerCase().includes(query)
             );
 
             displaySearchResults(filtered);
-            updateSummaryCounts(filtered.length);
         }
 
         function displaySearchResults(filtered) {
-            searchResults.innerHTML = '';
-
             if (filtered.length === 0) {
-                const noResults = document.createElement('div');
-                noResults.className = 'search-result-item no-results';
-                noResults.innerHTML = '<i class="fas fa-search-minus"></i> No se encontraron resultados';
-                searchResults.appendChild(noResults);
+                searchResults.innerHTML = `
+                    <div class="search-result-item">
+                        <i class="fas fa-search-minus"></i> No se encontraron resultados
+                    </div>
+                `;
             } else {
-                filtered.forEach((product, index) => {
-                    const item = document.createElement('div');
-                    item.className = 'search-result-item';
-                    item.setAttribute('role', 'option');
-                    item.setAttribute('tabindex', '0');
-                    
-                    const codeEl = document.createElement('div');
-                    codeEl.className = 'result-code';
-                    codeEl.textContent = product.code;
-
-                    const descEl = document.createElement('div');
-                    descEl.className = 'result-desc';
-                    descEl.textContent = product.description;
-
-                    const priceEl = document.createElement('div');
-                    priceEl.className = 'result-price';
-                    priceEl.textContent = `Tu costo: ${formatCurrency(product.discount35)}`;
-
-                    item.appendChild(codeEl);
-                    item.appendChild(descEl);
-                    item.appendChild(priceEl);
-
-                    const productIndex = products.indexOf(product);
-                    item.addEventListener('click', () => {
-                        selectProduct(productIndex);
-                        hideSearchResults();
-                    });
-
-                    searchResults.appendChild(item);
-                });
+                searchResults.innerHTML = filtered.map((product, idx) => `
+                    <div class="search-result-item">
+                        <div class="result-info">
+                            <div class="result-code">${product.code}</div>
+                            <div class="result-desc">${product.description}</div>
+                            <div class="result-price">Tu costo: ${formatCurrency(product.discount35)}</div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(currentProducts.find(p => p.code === '${product.code}'))">
+                            <i class="fas fa-cart-plus"></i>
+                            Agregar
+                        </button>
+                    </div>
+                `).join('');
             }
 
             searchResults.style.display = 'block';
-            searchResults.setAttribute('aria-expanded', 'true');
         }
 
-        function hideSearchResults() {
+        // ==========================================
+        // EVENT LISTENERS
+        // ==========================================
+        searchInput.addEventListener('input', debounce(handleSearch, 300));
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
             searchResults.style.display = 'none';
-            searchResults.setAttribute('aria-expanded', 'false');
-            searchFocusIndex = -1;
-        }
+        });
 
-        function handleSearchKeydown(e) {
-            const items = Array.from(searchResults.querySelectorAll('.search-result-item:not(.no-results)'));
-            if (!items.length) return;
+        cartFloatBtn.addEventListener('click', () => {
+            cartModal.classList.add('active');
+        });
 
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                searchFocusIndex = Math.min(searchFocusIndex + 1, items.length - 1);
-                updateSearchFocus(items);
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                searchFocusIndex = Math.max(searchFocusIndex - 1, 0);
-                updateSearchFocus(items);
-            } else if (e.key === 'Enter') {
-                e.preventDefault();
-                if (searchFocusIndex >= 0 && items[searchFocusIndex]) {
-                    items[searchFocusIndex].click();
-                }
-            } else if (e.key === 'Escape') {
-                hideSearchResults();
+        closeCartModal.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+        });
+
+        cartModal.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                cartModal.classList.remove('active');
             }
-        }
+        });
 
-        function updateSearchFocus(items) {
-            items.forEach(i => i.classList.remove('focus'));
-            const current = items[searchFocusIndex];
-            if (current) {
-                current.classList.add('focus');
-                current.scrollIntoView({ block: 'nearest' });
-            }
-        }
+        document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+        document.getElementById('checkoutBtn').addEventListener('click', checkout);
 
-        function clearSearch() {
-            searchInput.value = '';
-            hideSearchResults();
-            searchInput.focus();
-            updateSummaryCounts(null);
-        }
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchPortfolio(btn.dataset.portfolio));
+        });
 
-        // ========================================
-        // ✅ SELECCIONAR PRODUCTO
-        // ========================================
-        function selectProduct(index) {
-            if (typeof index !== 'number' || index < 0 || index >= products.length) return;
-            
-            selectedProduct = products[index];
-            productSelect.value = index.toString();
-
-            console.log(`✅ Producto seleccionado: ${selectedProduct.description.slice(0, 60)}`);
-
-            quantityInput.focus();
-            if (quantityInput.value && Number(quantityInput.value) > 0) {
-                calculatePrices();
-            }
-        }
-
-        function handleProductSelection() {
-            const idx = productSelect.value;
-            if (idx === '') {
-                selectedProduct = null;
-                resultsDiv.style.display = 'none';
-            } else {
-                selectProduct(parseInt(idx, 10));
-            }
-        }
-
-        // ========================================
-        // ✔️ VALIDAR CANTIDAD
-        // ========================================
-        function validateQuantity() {
-            let v = parseInt(quantityInput.value, 10);
-            if (isNaN(v) || v < 1) v = 1;
-            if (v > 1000000) v = 1000000;
-            quantityInput.value = v;
-        }
-
-        // ========================================
-        // 🧮 CALCULAR PRECIOS
-        // ========================================
-        function calculatePrices() {
-            if (!selectedProduct) {
-                alert('⚠️ Por favor selecciona un producto primero');
-                return;
-            }
-
-            const qty = parseInt(quantityInput.value, 10) || 1;
-            const totalCost = selectedProduct.discount35 * qty;
-            const totalSuggestedPrice = selectedProduct.suggestedPrice * qty;
-            const totalProfit = totalSuggestedPrice - totalCost;
-            const profitMargin = totalCost > 0 ? (totalProfit / totalCost) * 100 : NaN;
-
-            // Actualizar UI
-            document.getElementById('costResult').textContent = formatCurrency(totalCost);
-            document.getElementById('priceResult').textContent = formatCurrency(totalSuggestedPrice);
-            document.getElementById('profitResult').textContent = formatCurrency(totalProfit);
-            
-            const marginEl = document.getElementById('marginResult');
-            marginEl.textContent = formatPercentage(profitMargin);
-            marginEl.className = 'result-value';
-            
-            if (isNaN(profitMargin)) {
-                marginEl.classList.add('text-muted');
-            } else if (profitMargin >= 50) {
-                marginEl.classList.add('text-success');
-            } else if (profitMargin >= 30) {
-                marginEl.classList.add('text-warning');
-            } else {
-                marginEl.classList.add('text-danger');
-            }
-
-            resultsDiv.style.display = 'block';
-            console.log(`📊 Cálculo: ${selectedProduct.description} x${qty} -> Ganancia ${formatCurrency(totalProfit)} (${formatPercentage(profitMargin)})`);
-        }
-
-        // ========================================
-        // 🔄 REINICIAR CALCULADORA
-        // ========================================
-        function resetCalculator() {
-            selectedProduct = null;
-            productSelect.value = '';
-            quantityInput.value = '1';
-            resultsDiv.style.display = 'none';
-            searchInput.value = '';
-            hideSearchResults();
-            updateSummaryCounts(null);
-            console.log('🔄 Calculadora reiniciada');
-        }
-
-        // ========================================
-        // 🎬 INICIAR APLICACIÓN
-        // ========================================
-        document.addEventListener('DOMContentLoaded', initApp);
+        // ==========================================
+        // INICIALIZACIÓN
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            populateProductsTable();
+            updateCartUI();
+            console.log('🚀 Calculadora Omnilife iniciada');
+            console.log(`📦 Nutrición: ${productsNutricion.length} productos`);
+            console.log(`💄 Seytu: ${productsSeytu.length} productos`);
+        });
     </script>
 </body>
 </html>
