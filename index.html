@@ -22,6 +22,7 @@
             --primary-light: #7E57C2;
             --accent: var(--omni-orange);
             --success: #00C853;
+            --danger: #EF4444;
             
             --bg-body: #F3F4F6;
             --bg-card: #ffffff;
@@ -527,55 +528,194 @@
             background: var(--bg-body);
         }
 
+        /* Estilos visuales y específicos del carrito MODIFICADOS */
         .cart-item-row {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding: 1rem;
+            align-items: flex-start; /* Alineación arriba */
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px;
             background: white;
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
             animation: popIn 0.3s ease-out backwards;
+            transition: transform 0.2s;
         }
 
-        .cart-item-details { flex: 1; }
+        .cart-item-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(94, 44, 131, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--omni-purple);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            min-width: 0; 
+        }
+
+        .cart-item-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .cart-item-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .cart-item-financials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .cart-price-tag {
+            font-weight: 800;
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+
+        .cart-profit-tag {
+            font-size: 0.75rem;
+            color: var(--success);
+            background: #E8F5E9;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        /* NUEVOS ESTILOS PARA EL INPUT Y BOTON ELIMINAR */
+        .cart-controls-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .btn-delete-item {
+            background: #FEE2E2;
+            color: var(--danger);
+            border: none;
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .btn-delete-item:hover { background: var(--danger); color: white; }
+
+        .qty-selector-horizontal {
+            display: flex;
+            align-items: center;
+            background: var(--bg-body);
+            border-radius: 8px;
+            padding: 2px;
+            border: 1px solid var(--border);
+        }
+
+        .qty-selector-horizontal button {
+            width: 28px; height: 28px;
+            border: none;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .qty-input-direct {
+            width: 40px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            -moz-appearance: textfield;
+        }
+        .qty-input-direct::-webkit-outer-spin-button,
+        .qty-input-direct::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .qty-input-direct:focus { outline: none; }
+
+
+        /* Resumen del carrito Grid */
+        .cart-summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 1rem;
+            padding: 12px;
+            background: #F9FAFB;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .summary-card {
+            padding: 10px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .summary-card.highlight {
+            background: linear-gradient(135deg, var(--omni-purple), #7E57C2);
+            color: white;
+        }
+        .summary-card.highlight .summary-label { color: rgba(255,255,255,0.8); }
+        .summary-card.highlight .summary-value { color: white; }
+
+        .summary-card.profit {
+            background: #ECFDF5;
+            border: 1px solid #A7F3D0;
+        }
+        .summary-card.profit .summary-label { color: #065F46; }
+        .summary-card.profit .summary-value { color: #059669; }
+
+        .summary-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .summary-value {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
 
         .drawer-footer {
             padding: 1.5rem;
             border-top: 1px solid var(--border);
             background: white;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
-        }
-
-        .summary-line {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .summary-total-sale {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 0.5rem;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--text-main);
-            padding: 8px 0;
-            border-top: 1px dashed var(--border);
-        }
-
-        .summary-total-profit {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 0.5rem;
-            padding: 10px;
-            background: rgba(0, 200, 83, 0.1);
-            border-radius: 8px;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--success);
         }
 
         .btn-checkout {
@@ -586,7 +726,7 @@
             padding: 14px;
             border-radius: 50px;
             font-weight: 800;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             font-size: 1.1rem;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
@@ -748,23 +888,23 @@
         </div>
 
         <div class="drawer-footer">
-            <div class="summary-line">
-                <span>Puntos Totales:</span>
-                <span id="summaryPoints" style="font-weight: 700; color: var(--omni-purple);">0 pts</span>
-            </div>
-            <div class="summary-line">
-                <span>Costo Inversión (35%):</span>
-                <span id="summaryCost">$0</span>
-            </div>
-            
-            <div class="summary-total-sale">
-                <span>Total a Cobrar:</span>
-                <span style="color: var(--text-main);" id="summarySuggested">$0</span>
-            </div>
-            
-            <div class="summary-total-profit">
-                <span><i class="fas fa-wallet"></i> Tu Ganancia:</span>
-                <span id="summaryProfit">$0</span>
+            <div class="cart-summary-grid">
+                <div class="summary-card">
+                    <span class="summary-label">Puntos</span>
+                    <span class="summary-value" id="summaryPoints" style="color: var(--omni-purple);">0</span>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">Tu Costo</span>
+                    <span class="summary-value" id="summaryCost">$0</span>
+                </div>
+                <div class="summary-card profit">
+                    <span class="summary-label">Tu Ganancia</span>
+                    <span class="summary-value" id="summaryProfit">$0</span>
+                </div>
+                <div class="summary-card highlight">
+                    <span class="summary-label">Total Venta</span>
+                    <span class="summary-value" id="summarySuggested">$0</span>
+                </div>
             </div>
 
             <button class="btn-checkout" onclick="checkout()">
@@ -977,8 +1117,7 @@
             sumPoints: document.getElementById('summaryPoints'),
             sumSuggested: document.getElementById('summarySuggested'),
             sumCost: document.getElementById('summaryCost'),
-            sumProfit: document.getElementById('summaryProfit'),
-            totalToPay: document.getElementById('totalToPay')
+            sumProfit: document.getElementById('summaryProfit')
         };
 
         // ========================
@@ -1064,6 +1203,27 @@
                 showToast("Producto eliminado", true);
             }
             saveCart();
+        };
+
+        const setQty = (code, value) => {
+            const existing = state.cart.find(item => item.code === code);
+            if (!existing) return;
+            
+            const newQty = parseInt(value);
+            if (isNaN(newQty) || newQty <= 0) {
+                existing.quantity = 1; // Reset to 1 if invalid, use delete button to remove
+            } else {
+                existing.quantity = newQty;
+            }
+            saveCart();
+        };
+
+        const removeItem = (code) => {
+            if(confirm("¿Eliminar este producto?")) {
+                state.cart = state.cart.filter(item => item.code !== code);
+                showToast("Producto eliminado", true);
+                saveCart();
+            }
         };
 
         const clearCart = () => {
@@ -1242,23 +1402,44 @@
             } else {
                 DOM.cartItemsList.innerHTML = state.cart.map((item, idx) => {
                     const profitItem = (item.suggestedPrice - item.discount35) * item.quantity;
+                    const totalItemPrice = item.suggestedPrice * item.quantity;
+                    
                     return `
                     <div class="cart-item-row" style="animation-delay: ${idx * 50}ms">
+                        <!-- Icono visual -->
+                        <div class="cart-item-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        
+                        <!-- Detalles del Producto -->
                         <div class="cart-item-details">
-                            <div style="font-weight:700; font-size:0.95rem; color: var(--omni-purple);">${item.description}</div>
-                            <div style="display:flex; gap:10px; align-items:center; margin-top:6px;">
-                                <span style="font-weight:800; color:var(--text-main); font-size: 1rem;">
-                                    ${formatCurrency(item.suggestedPrice)}
+                            <div class="cart-item-title">${item.description}</div>
+                            <div class="cart-item-meta">
+                                <span>Cod: ${item.code}</span>
+                                <span>•</span>
+                                <span style="color: var(--omni-purple); font-weight:700;">${item.points * item.quantity} pts</span>
+                            </div>
+                            
+                            <div class="cart-item-financials">
+                                <span class="cart-price-tag">
+                                    ${formatCurrency(totalItemPrice)}
                                 </span>
-                                <span style="font-size:0.75rem; color:var(--success); font-weight:700; background: #E8F5E9; padding: 2px 6px; border-radius: 4px;">
-                                    Ganas: ${formatCurrency(profitItem)}
+                                <span class="cart-profit-tag">
+                                    Ganancia: ${formatCurrency(profitItem)}
                                 </span>
                             </div>
                         </div>
-                        <div class="qty-selector">
-                            <button class="qty-btn-card" onclick="updateQty('${item.code}', -1)"><i class="fas fa-minus" style="font-size: 0.7rem;"></i></button>
-                            <span class="qty-val-card">${item.quantity}</span>
-                            <button class="qty-btn-card" onclick="updateQty('${item.code}', 1)"><i class="fas fa-plus" style="font-size: 0.7rem;"></i></button>
+
+                        <!-- Controles -->
+                        <div class="cart-controls-wrapper">
+                            <button class="btn-delete-item" onclick="removeItem('${item.code}')" title="Eliminar">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <div class="qty-selector-horizontal">
+                                <button onclick="updateQty('${item.code}', -1)">-</button>
+                                <input type="number" class="qty-input-direct" value="${item.quantity}" onchange="setQty('${item.code}', this.value)">
+                                <button onclick="updateQty('${item.code}', 1)">+</button>
+                            </div>
                         </div>
                     </div>
                 `}).join('');
