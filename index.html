@@ -70,6 +70,16 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
+        /* Animación del Corredor - MÁS LENTA (1.5s) */
+        .runner-anim {
+            position: fixed;
+            z-index: 9999;
+            font-size: 2.5rem; /* Un poco más grande para que se vea mejor */
+            pointer-events: none;
+            transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto resorte lento */
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        }
+
         /*Header Sticky con Degradado Omni */
         .app-header {
             position: sticky;
@@ -758,7 +768,7 @@
             </div>
 
             <button class="btn-checkout" onclick="checkout()">
-                <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Enviar Pedido
+                <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Enviar Cotización
             </button>
             <button onclick="clearCart()" style="width:100%; border:none; background:none; color: var(--text-muted); padding: 10px; cursor:pointer; font-size:0.8rem; margin-top:0.5rem; opacity: 0.7;">
                 <i class="fas fa-trash-alt"></i> Vaciar Carrito
@@ -989,7 +999,7 @@
             renderProducts(); // Re-render to show quantities in cards
         };
 
-        const addToCart = (code, qty = 1) => {
+        const addToCart = (code, qty = 1, event) => {
             const currentList = state.currentTab === 'nutricion' ? productsNutricion : productsSeytu;
             // Buscar en ambas listas por si acaso
             let product = productsNutricion.find(p => p.code === code) || productsSeytu.find(p => p.code === code);
@@ -1002,8 +1012,46 @@
                 state.cart.push({ ...product, quantity: qty });
             }
             
-            showToast(`Agregado: ${product.description.substring(0,20)}...`);
+            // Disparar la animación del corredor si hay evento
+            if (event) {
+                runToCartAnimation(event.clientX, event.clientY);
+            } else {
+                showToast(`Agregado: ${product.description.substring(0,20)}...`);
+            }
+            
             saveCart();
+        };
+
+        // Función para animar al corredor
+        const runToCartAnimation = (startX, startY) => {
+            const cartBtn = document.querySelector('.fab-cart');
+            const rect = cartBtn.getBoundingClientRect();
+            const endX = rect.left + rect.width / 2 - 20; // Ajuste para centrar
+            const endY = rect.top + rect.height / 2 - 20;
+
+            const runner = document.createElement('div');
+            runner.className = 'runner-anim';
+            runner.innerHTML = '🏃📦'; // Corredor con paquete
+            runner.style.left = `${startX}px`;
+            runner.style.top = `${startY}px`;
+            
+            document.body.appendChild(runner);
+
+            // Forzar reflow
+            void runner.offsetWidth;
+
+            runner.style.left = `${endX}px`;
+            runner.style.top = `${endY}px`;
+            runner.style.opacity = '0';
+            runner.style.transform = 'scale(0.5)'; // Se hace pequeño al entrar
+
+            setTimeout(() => {
+                runner.remove();
+                // Efecto de rebote en el carrito al llegar
+                cartBtn.style.transform = 'scale(1.3)';
+                setTimeout(() => cartBtn.style.transform = 'scale(1)', 200);
+                showToast("¡Producto en la canasta!");
+            }, 1500); // Duración sincronizada con CSS (1.5s)
         };
 
         const updateQty = (code, delta) => {
@@ -1158,7 +1206,7 @@
                         <!-- Controls Logic -->
                         <div style="width: 110px;">
                             ${qty === 0 ? 
-                                `<button class="add-btn" onclick="addToCart('${p.code}')">
+                                `<button class="add-btn" onclick="addToCart('${p.code}', 1, event)">
                                     <i class="fas fa-cart-plus"></i> Agregar
                                  </button>` :
                                 `<div class="qty-selector" style="display:flex; justify-content: space-between;">
@@ -1262,11 +1310,18 @@
                 return acc;
             }, { suggested: 0 });
 
-            let text = `👋 Hola, quiero realizar el siguiente pedido:%0A%0A`;
+            let text = `👋 *Hola! Aquí tienes la cotización de tu pedido Omnilife / Seytu:*%0A%0A`;
+
             state.cart.forEach(item => {
-                text += `▪️ *(${item.quantity})* ${item.description} - ${formatCurrency(item.suggestedPrice * item.quantity)}%0A`;
+                const itemTotal = item.suggestedPrice * item.quantity;
+                text += `📦 *${item.description}* (x${item.quantity})%0A`;
+                text += `💡 _${item.benefits || 'Excelente para tu bienestar.'}_%0A`;
+                text += `💲 Valor: ${formatCurrency(itemTotal)}%0A`;
+                text += `-----------------------------------%0A`;
             });
-            text += `%0A💰 *Total a Cobrar: ${formatCurrency(totals.suggested)}*`;
+
+            text += `%0A💰 *TOTAL A PAGAR: ${formatCurrency(totals.suggested)}*%0A`;
+            text += `%0AQuedo atento para coordinar la entrega. ¡Gracias! ✨`;
             
             window.open(`https://wa.me/?text=${text}`, '_blank');
         };
